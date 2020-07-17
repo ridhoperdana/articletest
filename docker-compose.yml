@@ -1,0 +1,26 @@
+version: '2.3'
+
+networks:
+  backend:
+    driver: bridge
+
+services:
+  mongo:
+    image: mongo:4.2
+    container_name: articletest_mongo
+    ports:
+      - 27017:27017
+    networks:
+      - backend
+
+  api:
+    image: articletest
+    container_name: articletest_api
+    ports:
+      - 6969:6969
+    env_file:
+      - .env
+    links:
+      - mongo
+    networks:
+      - backend
