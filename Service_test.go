@@ -3,137 +3,137 @@
 // 0001-01-01 00:00:00 +0000 UTC
 
 package articletest_test
-
-import (
-	"testing"
-
-	"github.com/ridhoperdana/articletest"
-	"github.com/stretchr/testify/require"
-)
-
-func TestServiceImplementation_Createarticles(t *testing.T) {
-	type output struct {
-		result0 articletest.Article
-
-		err error
-	}
-
-	type input struct {
-		input0 articletest.Article
-	}
-	tests := []struct {
-		name   string
-		input  input
-		output output
-	}{}
-
-	for _, test := range tests {
-		t.Run(test.name, func(t *testing.T) {
-			service := articletest.serviceImplementation{}
-			res0, err := service.Createarticles(test.input.input0)
-			require.Equal(t, test.output.err, err)
-			require.Equal(t, test.output.result0, res0)
-		})
-	}
-}
-func TestServiceImplementation_Deletearticlebyid(t *testing.T) {
-	type output struct {
-		err error
-	}
-
-	type input struct {
-		input0 string
-	}
-	tests := []struct {
-		name   string
-		input  input
-		output output
-	}{}
-
-	for _, test := range tests {
-		t.Run(test.name, func(t *testing.T) {
-			service := articletest.serviceImplementation{}
-			err := service.Deletearticlebyid(test.input.input0)
-			require.Equal(t, test.output.err, err)
-		})
-	}
-}
-func TestServiceImplementation_Listarticles(t *testing.T) {
-	type output struct {
-		result0 articletest.Articles
-
-		err error
-	}
-
-	type input struct {
-		input0 int32
-
-		input1 string
-	}
-	tests := []struct {
-		name   string
-		input  input
-		output output
-	}{}
-
-	for _, test := range tests {
-		t.Run(test.name, func(t *testing.T) {
-			service := articletest.serviceImplementation{}
-			res0, err := service.Listarticles(test.input.input0, test.input.input1)
-			require.Equal(t, test.output.err, err)
-			require.Equal(t, test.output.result0, res0)
-		})
-	}
-}
-func TestServiceImplementation_Showarticlebyid(t *testing.T) {
-	type output struct {
-		result0 articletest.Article
-
-		err error
-	}
-
-	type input struct {
-		input0 string
-	}
-	tests := []struct {
-		name   string
-		input  input
-		output output
-	}{}
-
-	for _, test := range tests {
-		t.Run(test.name, func(t *testing.T) {
-			service := articletest.serviceImplementation{}
-			res0, err := service.Showarticlebyid(test.input.input0)
-			require.Equal(t, test.output.err, err)
-			require.Equal(t, test.output.result0, res0)
-		})
-	}
-}
-func TestServiceImplementation_Updatearticle(t *testing.T) {
-	type output struct {
-		result0 articletest.Article
-
-		err error
-	}
-
-	type input struct {
-		input0 string
-
-		input1 articletest.Article
-	}
-	tests := []struct {
-		name   string
-		input  input
-		output output
-	}{}
-
-	for _, test := range tests {
-		t.Run(test.name, func(t *testing.T) {
-			service := articletest.serviceImplementation{}
-			res0, err := service.Updatearticle(test.input.input0, test.input.input1)
-			require.Equal(t, test.output.err, err)
-			require.Equal(t, test.output.result0, res0)
-		})
-	}
-}
+//
+//import (
+//	"testing"
+//
+//	"github.com/ridhoperdana/articletest"
+//	"github.com/stretchr/testify/require"
+//)
+//
+//func TestServiceImplementation_Createarticles(t *testing.T) {
+//	type output struct {
+//		result0 articletest.Article
+//
+//		err error
+//	}
+//
+//	type input struct {
+//		input0 articletest.Article
+//	}
+//	tests := []struct {
+//		name   string
+//		input  input
+//		output output
+//	}{}
+//
+//	for _, test := range tests {
+//		t.Run(test.name, func(t *testing.T) {
+//			service := articletest.NewArticleService()
+//			res0, err := service.Createarticles(test.input.input0)
+//			require.Equal(t, test.output.err, err)
+//			require.Equal(t, test.output.result0, res0)
+//		})
+//	}
+//}
+//func TestServiceImplementation_Deletearticlebyid(t *testing.T) {
+//	type output struct {
+//		err error
+//	}
+//
+//	type input struct {
+//		input0 string
+//	}
+//	tests := []struct {
+//		name   string
+//		input  input
+//		output output
+//	}{}
+//
+//	for _, test := range tests {
+//		t.Run(test.name, func(t *testing.T) {
+//			service := articletest.NewArticleService()
+//			err := service.Deletearticlebyid(test.input.input0)
+//			require.Equal(t, test.output.err, err)
+//		})
+//	}
+//}
+//func TestServiceImplementation_Listarticles(t *testing.T) {
+//	type output struct {
+//		result0 articletest.Articles
+//
+//		err error
+//	}
+//
+//	type input struct {
+//		input0 int32
+//
+//		input1 string
+//	}
+//	tests := []struct {
+//		name   string
+//		input  input
+//		output output
+//	}{}
+//
+//	for _, test := range tests {
+//		t.Run(test.name, func(t *testing.T) {
+//			service := articletest.NewArticleService()
+//			res0, res1, err := service.Listarticles(test.input.input0, test.input.input1)
+//			require.Equal(t, test.output.err, err)
+//			require.Equal(t, test.output.result0, res0)
+//		})
+//	}
+//}
+//func TestServiceImplementation_Showarticlebyid(t *testing.T) {
+//	type output struct {
+//		result0 articletest.Article
+//
+//		err error
+//	}
+//
+//	type input struct {
+//		input0 string
+//	}
+//	tests := []struct {
+//		name   string
+//		input  input
+//		output output
+//	}{}
+//
+//	for _, test := range tests {
+//		t.Run(test.name, func(t *testing.T) {
+//			service := articletest.NewArticleService()
+//			res0, err := service.Showarticlebyid(test.input.input0)
+//			require.Equal(t, test.output.err, err)
+//			require.Equal(t, test.output.result0, res0)
+//		})
+//	}
+//}
+//func TestServiceImplementation_Updatearticle(t *testing.T) {
+//	type output struct {
+//		result0 articletest.Article
+//
+//		err error
+//	}
+//
+//	type input struct {
+//		input0 string
+//
+//		input1 articletest.Article
+//	}
+//	tests := []struct {
+//		name   string
+//		input  input
+//		output output
+//	}{}
+//
+//	for _, test := range tests {
+//		t.Run(test.name, func(t *testing.T) {
+//			service := articletest.NewArticleService()
+//			res0, err := service.Updatearticle(test.input.input0, test.input.input1)
+//			require.Equal(t, test.output.err, err)
+//			require.Equal(t, test.output.result0, res0)
+//		})
+//	}
+//}
