@@ -33,6 +33,7 @@ var (
 			e := echo.New()
 			service := articletest.NewArticleService(repo)
 			delivery.RegisterHTTPPath(e, service)
+			port = os.Getenv("PORT")
 			if port == "" {
 				port = "6969"
 			}
