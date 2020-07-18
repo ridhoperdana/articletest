@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"context"
+	"net/http"
 	"os"
 	"strconv"
 	"time"
@@ -31,6 +32,9 @@ var (
 		Long:  "Run HTTP Server for articletest",
 		Run: func(cmd *cobra.Command, args []string) {
 			e := echo.New()
+			e.GET("/ping", func(c echo.Context) error {
+				return c.JSON(http.StatusOK, "pong")
+			})
 			service := articletest.NewArticleService(repo)
 			delivery.RegisterHTTPPath(e, service)
 			port = os.Getenv("PORT")
@@ -56,11 +60,17 @@ func initApp() {
 		logrus.Fatal("MONGO_SERVER_SELECTION_TIMEOUT is not well-set", err)
 	}
 
+	credentials := options.Credential{
+		Username:                os.Getenv("MONGO_USERNAME"),
+		Password:                os.Getenv("MONGO_PASSWORD"),
+	}
+
 	mongoClient, err := mongo.Connect(
 		context.Background(),
 		options.Client().ApplyURI(os.Getenv("MONGO_URI")).
 			SetConnectTimeout(time.Duration(mongoConnectTimeout)*time.Second).
-			SetServerSelectionTimeout(time.Duration(mongoSelectionTimeout)*time.Second),
+			SetServerSelectionTimeout(time.Duration(mongoSelectionTimeout)*time.Second).
+			SetAuth(credentials),
 	)
 	if err != nil {
 		logrus.Fatal("Mongo connection failed: ", err.Error())

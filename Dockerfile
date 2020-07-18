@@ -28,3 +28,5 @@ WORKDIR /app
 COPY --from=builder /app/articletest .
 
 EXPOSE 6969
+
+CMD ["./articletest", "http"]
