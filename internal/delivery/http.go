@@ -30,7 +30,7 @@ func (h httpHandler) createArticles(c echo.Context) error {
 		return err
 	}
 
-	return c.JSON(http.StatusOK, result0)
+	return c.JSON(http.StatusCreated, result0)
 
 }
 

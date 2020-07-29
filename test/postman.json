@@ -1,0 +1,82 @@
+{
+	"info": {
+		"_postman_id": "d209f24a-e108-40c7-ab3e-79f35da94e74",
+		"name": "ArticleTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Article",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ffd045b1-afad-4120-9ad3-3b8d31ba4ff8",
+						"exec": [
+							"pm.test(\"successful to store new article\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"response is expected object\", function () {",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"    var jsonData = pm.response.json(); ",
+							"    pm.expect(jsonData.title).to.equal(\"article title baru\");",
+							"    pm.expect(jsonData.id).not.equal(\"\");",
+							"",
+							"    pm.environment.set(\"storedID\", jsonData.id);",
+							"    pm.environment.set(\"storedArticle\", jsonData);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"article title baru\",\n    \"updated_at\": \"2020-07-17T02:00:37.188Z\",\n    \"author\": {\n        \"id\": \"author-id\",\n        \"name\": \"author-name\"\n    },\n    \"created_at\": \"2020-07-17T02:00:37.188Z\",\n    \"id\": \"d8a3f1e3-8801-4d71-82a5-ad8678941b7a\",\n    \"publisher\": {\n        \"id\": \"publisher-id\",\n        \"name\": \"publisher-name\"\n    },\n    \"tag\": {\n        \"content\": {\n            \"string\": \"\",\n            \"id\": \"topic-id\",\n            \"name\": \"topic-name\"\n        },\n        \"type\": \"topic\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://api:6969/article"
+			},
+			"response": []
+		},
+		{
+			"name": "Get article by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "86bc2dd9-3cc3-4d09-aabc-4b90ecb56097",
+						"exec": [
+							"pm.test(\"response is ok and a json object\", function () {",
+							"    pm.response.to.have.status(200);",
+							"    pm.response.to.be.withBody;",
+							"    pm.response.to.be.json;",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://api:6969/article/{{storedID}}"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -80,6 +80,10 @@ func initApp() {
 		logrus.Fatal("Mongo client nil")
 	}
 
+	if err := mongoClient.Ping(context.TODO(), nil); err != nil {
+		logrus.Fatal("fatal: ", err)
+	}
+
 	repo = repository.NewMongoRepository(mongoClient.Database("articletest"))
 }
 

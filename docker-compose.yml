@@ -1,4 +1,4 @@
-version: '2.3'
+version: '3.7'
 
 networks:
   backend:
@@ -7,13 +7,36 @@ networks:
 services:
   mongo:
     image: mongo:4.2
+    hostname: mongodb
     container_name: articletest_mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ridho
+      MONGO_INITDB_ROOT_PASSWORD: secret
+      MONGO_INITDB_DATABASE: articletest
+    volumes:
+      - ./test/mongo.sh:/docker-entrypoint-initdb.d/mongo.sh:ro
     ports:
       - 27017:27017
     networks:
       - backend
 
+  test:
+    build:
+      context: .
+      dockerfile: ./test/Dockerfile
+    image: e2etest
+    container_name: articletest_test
+    links:
+      - api
+    networks:
+      - backend
+    volumes:
+    - ./test:/app:rw
+
   api:
+    build:
+      context: .
+      dockerfile: ./deployment/Dockerfile
     image: articletest
     container_name: articletest_api
     ports:
